@@ -29,7 +29,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
         }
 
         let isMounted = true;
-        let intervalId = null;
+        let intervalId: NodeJS.Timeout | null = null;
 
         const fetchComments = async () => {
             try {
@@ -188,7 +188,5 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
         </Box>
     );   
 };
-
-
 
 export default CommentList
