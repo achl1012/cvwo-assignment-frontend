@@ -6,7 +6,7 @@ module.exports = function (app: Application) {
 	app.use(
 		["/users", "/login", "/channels", "/messages"],
 		createProxyMiddleware({
-			target: "http://localhost:8080",
+			target: "https://forumflow-backend-ryao.onrender.com",
 			changeOrigin: true,
 		}),
 	);
