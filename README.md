@@ -37,27 +37,22 @@ This application consists of two repositories: one for the **React frontend** an
    Your frontend should now be running at http://localhost:10001
 
 ### Backend setup
-1. **Clone the Backend Repository**
-   
-   In your terminal, run the following command to clone the backend repository:
-   
-   ```bash
-   git clone https://github.com/achl1012/cvwo-assignment-backend.git
-   cd cvwo-assignment-backend
-   ```
+1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) this repo.
+2. [Clone](https://docs.github.com/en/get-started/quickstart/fork-a-repo#cloning-your-forked-repository) **your** forked repo.
+3. Open your terminal and navigate to the directory containing your cloned project.
 
-2. **Install Go**
+4. **Install Go**
    
    Ensure you have Go installed on your computer. If not, follow the instructions from the official [Go website](https://go.dev/doc/install).
 
-3. **Install dependencies**
+5. **Install dependencies**
 
    You can install necessary Go packages via:
    ```bash
    go mod tidy
    ```
 
-4. **Set Up PostgreSQL Locally**
+6. **Set Up PostgreSQL Locally**
 
    If you don't have PostgreSQL installed, download and install it from [here](https://www.postgresql.org/download/).
 
@@ -88,7 +83,7 @@ This application consists of two repositories: one for the **React frontend** an
      GRANT ALL PRIVILEGES ON DATABASE forumflow TO yourusername;
      ```
 
-5. **Configure `.env` file**
+7. **Configure `.env` file**
 
    Create a .env file in the root of the backend folder if it doesn't already exist.
 
@@ -99,7 +94,7 @@ This application consists of two repositories: one for the **React frontend** an
 
    Note: Replace yourusername and yourpassword with the credentials you used to set up the database. If you're using a different host or port, make sure to adjust the URL accordingly.
    
-7. **Run the backend**
+8. **Run the backend**
    Start the Go backend server:
    ```bash
    go run cmd/server/main.go
