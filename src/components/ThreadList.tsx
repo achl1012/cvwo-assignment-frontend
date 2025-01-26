@@ -37,12 +37,13 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
     const [availableTags, setAvailableTags] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filterTags, setFilterTags] = useState<string[]>([]);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     // fetch threads (with optional tag filtering)
     const fetchThreads = async () => {
         try {
             const queryParams = filterTags.length > 0 ? `?tags=${filterTags.join(",")}` : "";
-            const response = await fetch(`http://localhost:8080/threads${queryParams}`);
+            const response = await fetch(`${apiUrl}/threads${queryParams}`);
             const data: Thread[] = await response.json();
             setThreads(data || []);
         } catch (error) {
@@ -72,7 +73,7 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
         fetchThreads();
 
         const fetchTags = async () => {
-            const response = await fetch("http://localhost:8080/tags");
+            const response = await fetch(`${apiUrl}/tags`);
             if (response.ok) {
                 const tags: string[] = await response.json();
                 setAvailableTags(tags);
@@ -97,7 +98,7 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
             tags: tags.length > 0 ? tags : []
         };
 
-		const response = await fetch("http://localhost:8080/threads", {
+		const response = await fetch(`${apiUrl}/threads`, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(threadData),
@@ -112,7 +113,7 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
 
     // delete thread
     const handleDeleteThread = async (threadId: number) => {
-        const response = await fetch(`http://localhost:8080/threads/${threadId}`, {
+        const response = await fetch(`${apiUrl}/threads/${threadId}`, {
             method: "DELETE",
         });
 
@@ -132,7 +133,7 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
     // save edited thread
     const handleSaveEditedThread = async (threadId: number, newName: string, newTags: string[]) => {
         try {
-            const response = await fetch(`http://localhost:8080/threads/${threadId}`, {
+            const response = await fetch(`${apiUrl}/threads/${threadId}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ name: newName, tags: newTags }),

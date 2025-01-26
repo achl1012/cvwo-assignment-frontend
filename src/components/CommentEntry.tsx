@@ -11,6 +11,7 @@ interface CommentEntryProps {
 
 const CommentEntry: React.FC<CommentEntryProps> = ({ selectedThread, onNewComment}) => {
     const [text, setText] = useState("");
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const handlePostComment = async () => {
         const userId = localStorage.getItem("userId");
@@ -22,7 +23,7 @@ const CommentEntry: React.FC<CommentEntryProps> = ({ selectedThread, onNewCommen
         }
 
         try {
-			const response = await fetch("http://localhost:8080/comments", {
+			const response = await fetch(`${apiUrl}/comments`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({

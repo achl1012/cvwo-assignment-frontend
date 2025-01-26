@@ -22,6 +22,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
     const [editingText, setEditingText] = useState<string>("");
     const lastCommentIdRef = useRef<number | null>(null); // keep track of the last comment ID
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     useEffect(() => {
         if (!selectedThread) {
@@ -33,7 +34,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
 
         const fetchComments = async () => {
             try {
-                const response = await fetch (`http://localhost:8080/comments?threadID=${selectedThread.id}`);
+                const response = await fetch (`${apiUrl}/comments?threadID=${selectedThread.id}`);
                 const data: Comment[] = await response.json();
                 if (isMounted) {
                     const validComments = Array.isArray(data) ? data : [];
@@ -52,7 +53,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
         intervalId = setInterval(() => {
             if (lastCommentIdRef.current !== null) {
 				fetch(
-					`http://localhost:8080/comments?threadID=${selectedThread.id}&lastCommentID=${lastCommentIdRef.current}`
+					`${apiUrl}/comments?threadID=${selectedThread.id}&lastCommentID=${lastCommentIdRef.current}`
 				)
 					.then((response) => response.json())
 					.then((newComments: Comment[]) => {
@@ -86,7 +87,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
     // handle comment deletion
     const deleteComment = async (commentId: number) => {
         try {
-            const response = await fetch(`http://localhost:8080/comments/${commentId}`, {
+            const response = await fetch(`${apiUrl}/comments/${commentId}`, {
                 method: 'DELETE'
             });
 
@@ -107,7 +108,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
     // handle comment update
     const updateComment = async (commentId: number, newText: string) => {
         try {
-            const response = await fetch(`http://localhost:8080/comments/${commentId}`, {
+            const response = await fetch(`${apiUrl}/comments/${commentId}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
