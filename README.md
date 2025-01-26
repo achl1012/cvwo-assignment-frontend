@@ -8,16 +8,10 @@ There is also a tagging system which allows users to easily categorize and searc
 This application consists of two repositories: one for the **React frontend** and one for the **Go backend**. Follow the steps below to set up and run the application locally.
 
 ### Frontend Setup
-1. **Clone the Frontend Repository**
-   
-   In your terminal, run the following command to clone the frontend repository:
-   
-   ```bash
-   git clone https://github.com/achl1012/cvwo-assignment-frontend.git
-   cd cvwo-assignment-frontend
-   ```
-
-2. **Install dependencies**
+1. [Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo#forking-a-repository) this repo.
+2. [Clone](https://docs.github.com/en/get-started/quickstart/fork-a-repo#cloning-your-forked-repository) **your** forked repo.
+3. Open your terminal and navigate to the directory containing your cloned project.
+4. **Install dependencies**
 
    Make sure you have `Node.js` and `npm` installed. If not, download and install them from [nodejs.org](url)
    
@@ -26,13 +20,15 @@ This application consists of two repositories: one for the **React frontend** an
    npm install
    ```
 
-3. **Environment configuration**
+5. **Environment configuration**
+
    Create a `.env` file in the root of the frontend folder and set the following variables:
    ```.env
    VITE_API_URL=http://localhost:10000
    ```
 
-4. **Run the frontend**
+7. **Run the frontend**
+
    Start the React development server:
    ```bash
    npm start
