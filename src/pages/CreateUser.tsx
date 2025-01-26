@@ -21,7 +21,12 @@ const CreateUser: React.FC = () => {
 			if (response.ok) {
 				navigate("/");
 			} else {
-				alert("Account creation failed");
+                const errorData = await response.json();
+                if (response.status === 409 && errorData.error === "Username already exists") {
+                    alert("The username is already taken. Please choose a different username.");
+                } else {
+                    alert("Failed to update thread");
+                }
 			}
 		} catch (error) {
 			console.error("Account creation error:", error);

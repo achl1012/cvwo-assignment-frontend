@@ -22,7 +22,12 @@ const Login: React.FC = () => {
                 localStorage.setItem("userName", username);
                 navigate("/home");
             } else {
-                alert("Login failed");
+                const errorData = await response.json();
+                if (errorData.error === "Invalid username") {
+                    alert("No user exists with the provided username. Please try again.");
+                } else {
+                    alert("Login failed: " + errorData.error);
+                }
             }
         } catch (error) {
             console.error("Login error: " + error)
