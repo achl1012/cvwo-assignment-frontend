@@ -22,7 +22,7 @@ const CommentList: React.FC<CommentListProps> = ({ selectedThread, currentUserId
     const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
     const [editingText, setEditingText] = useState<string>("");
     const lastCommentIdRef = useRef<number | null>(null); // keep track of the last comment ID
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         if (!selectedThread) {

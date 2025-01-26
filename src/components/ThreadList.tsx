@@ -37,7 +37,7 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
     const [availableTags, setAvailableTags] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [filterTags, setFilterTags] = useState<string[]>([]);
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     // fetch threads (with optional tag filtering)
     const fetchThreads = async () => {

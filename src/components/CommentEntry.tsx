@@ -11,7 +11,7 @@ interface CommentEntryProps {
 
 const CommentEntry: React.FC<CommentEntryProps> = ({ selectedThread, onNewComment}) => {
     const [text, setText] = useState("");
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const handlePostComment = async () => {
         const userId = localStorage.getItem("userId");
