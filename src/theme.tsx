@@ -8,7 +8,8 @@ export const tagColors: { [key: string]: string } = {
 };
 
 export const getTagColor = (tag: string): string => {
-    return tagColors[tag] || '#808080'; // Default to grey
+    const trimmedTag = tag.trim();
+    return tagColors[trimmedTag] || '#808080'; // Default to grey
 };
 
 const theme = createTheme({

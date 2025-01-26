@@ -132,18 +132,22 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
 
     // save edited thread
     const handleSaveEditedThread = async (threadId: number, newName: string, newTags: string[]) => {
+        const trimmedTags = newTags.map(tag => tag.trim());
         try {
             const response = await fetch(`${apiUrl}/threads/${threadId}`, {
                 method: "PATCH",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: newName, tags: newTags }),
+                body: JSON.stringify({ name: newName, tags: trimmedTags }),
             });
+            console.log(newTags);
+
+            const responseBody = await response.json();
     
             if (response.ok) {
                 setThreads((previousThreads) => 
                     previousThreads.map((thread) => 
                         thread.id === threadId 
-                            ? {...thread, name: newName, tags: newTags} 
+                            ? {...thread, name: newName, tags: trimmedTags} 
                             : thread
                     )
                 );
@@ -153,7 +157,7 @@ const ThreadList: React.FC<ThreadListProps> = ({ selectedThread, setSelectedThre
                 setEditThreadName("");
                 setEditThreadTags([]);
             } else {
-                console.error("Failed to update thread");
+                console.error("Failed to update thread", responseBody);
                 alert("Failed to update thread")
             }
         } catch (error) {
